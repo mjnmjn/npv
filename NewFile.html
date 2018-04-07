@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <title>计算净现值</title>
+
+</head>
+
+<body bgcolor="#0000FF">
+
+<table border="1">
+
+<tr>
+
+<td>开始投资金额:</td><td><input type="text" name="cstz" id="cstz"><br></td>
+
+</tr>
+
+<tr>
+
+<td>贴现率:</td><td><input type="text" name="txl" id="txl"><br></td>
+
+</tr>
+
+<tr>
+
+<td>投资年份数:</td><td><input type="text" name="ysum" id="ysum" onchange="myFunction()"><br></td>
+
+</tr>
+
+<tr>
+
+    <div id="money"> </div>
+
+    
+
+    <button onclick="myFunction2()">点击计算</button>
+
+    <div>
+
+        <h1 id="result"></h1>
+
+    </div>
+
+</tr>
+
+</table>
+
+<center>
+
+</center>
+
+<script>
+
+    function myFunction(){
+
+        var x=document.getElementById("ysum").value;
+
+        var div=document.getElementById("money");
+
+        div.innerHTML="<h3>分别输入每年的投资金额：<br>";
+
+        for(var i=1;i<=x;i++){
+
+            var name="text"+i;
+
+            var ipt=document.createElement("input");
+
+            ipt.setAttribute("type","text");
+
+            ipt.setAttribute("id",name);
+
+            div.appendChild(ipt);
+
+            var ipt1=document.createElement("br");
+
+            div.appendChild(ipt1);
+
+        }
+
+    }
+
+    function myFunction2(){
+
+        var cstz=document.getElementById("cstz").value;
+
+        var txl=document.getElementById("txl").value;
+
+        var ysum=document.getElementById("ysum").value;
+
+
+
+        var npv=0;
+
+
+
+        for(var i=1;i<=ysum;i++){
+
+	
+
+            var name="text"+i;
+
+            var money=document.getElementById(name).value;
+
+            var temp=Math.pow(parseFloat(txl)+1,i);
+
+            npv+=money/temp;
+
+        }
+
+        npv-=cstz;
+
+        var lll=document.getElementById("result");
+
+        lll.innerHTML="<p>该项目的npv为："+npv;
+		alert("该项目的npv为："+npv);
+    }
+
+</script>
+
+
+
+</body>
+
+</html>
